@@ -14,11 +14,11 @@ CC = ${PREFIX}-gcc
 CXX = ${PREFIX}-g++
 AR = ${PREFIX}-ar
 
-CFLAGS = -I${KERNEL_SRC_DIR}/include -I${DEVICE_SRC_INC} -I${KERNEL_SRC_DIR}/portable/GCC/ARM_CM0/ -mcpu=cortex-m0plus -march=armv6-m
+CFLAGS = -I${KERNEL_SRC_DIR}/include -I${DEVICE_SRC_INC} -I${KERNEL_SRC_DIR}/portable/GCC/ARM_CM0/ -mcpu=cortex-m0plus -march=armv6-m --specs=nosys.specs
 
 build: freertos
 	${CC} main.c ${CFLAGS} -c -o ${ETHEN_MAIN_OUT}/main.o -L${KERNEL_OUT_DIR} -lfreertos
-	${CC} ${ETHEN_MAIN_OUT}/main.o -L${KERNEL_OUT_DIR} -lfreertos
+	${CC} ${ETHEN_MAIN_OUT}/main.o --specs=nosys.specs -o ${ETHEN_MAIN_OUT}/main.elf -L${KERNEL_OUT_DIR} -lfreertos
 
 freertos: freertos_folder
 	${CC} ${KERNEL_SRC_DIR}/croutine.c ${CFLAGS} -c -o ${KERNEL_OUT_DIR}/croutine.o
