@@ -14,7 +14,7 @@ CC = ${PREFIX}-gcc
 CXX = ${PREFIX}-g++
 AR = ${PREFIX}-ar
 
-CFLAGS = -I${KERNEL_SRC_DIR}/include -I${DEVICE_SRC_INC} -I${KERNEL_SRC_DIR}/portable/GCC/ARM_CM4/ -mcpu=cortex-m4 --specs=nosys.specs
+CFLAGS = -I${KERNEL_SRC_DIR}/include -I${DEVICE_SRC_INC} -I${KERNEL_SRC_DIR}/portable/GCC/ARM_CM4_MPU/ -mcpu=cortex-m4 --specs=nosys.specs
 
 build: freertos
 	${CC} main.c ${CFLAGS} -c -o ${ETHEN_MAIN_OUT}/main.o -L${KERNEL_OUT_DIR} -lfreertos
