@@ -28,6 +28,7 @@ freertos: freertos_folder
 	${CC} ${KERNEL_SRC_DIR}/stream_buffer.c ${CFLAGS} -c -o ${KERNEL_OUT_DIR}/stream_buffer.o
 	${CC} ${KERNEL_SRC_DIR}/tasks.c ${CFLAGS} -c -o ${KERNEL_OUT_DIR}/tasks.o
 	${CC} ${KERNEL_SRC_DIR}/timers.c ${CFLAGS} -c -o ${KERNEL_OUT_DIR}/timers.o
+	${CC} ${KERNEL_SRC_DIR}/portable/GCC/ARM_CM4_MPU/mpu_wrappers_v2_asm.c ${CFLAGS} -c -o ${KERNEL_OUT_DIR}/mpu_wrappers_v2_asm.o	
 
 	${AR} rcs ${KERNEL_OUT_DIR}/libfreertos.a ${KERNEL_OUT_DIR}/*.o
 
