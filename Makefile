@@ -18,7 +18,7 @@ CFLAGS = -I${KERNEL_SRC_DIR}/include -I${DEVICE_SRC_INC} -I${KERNEL_SRC_DIR}/por
 
 build: freertos
 	${CC} main.c ${CFLAGS} -c -o ${ETHEN_MAIN_OUT}/main.o -L${KERNEL_OUT_DIR} -lfreertos
-	${CC} ${ETHEN_MAIN_OUT}/main.o --specs=nosys.specs -o ${ETHEN_MAIN_OUT}/main.elf -L${KERNEL_OUT_DIR} -lfreertos
+	${CC} ${ETHEN_MAIN_OUT}/main.o ${ETHEN_MAIN_OUT}/products/hal/startup.o --specs=nosys.specs -o ${ETHEN_MAIN_OUT}/main.elf -L${KERNEL_OUT_DIR} -L${ETHEN_MAIN_OUT}/products/hal -lfreertos -lhal -T ../../hardware/st/stm32wb55cg/link.lds # TODO: Enable modularity
 
 freertos: freertos_folder
 	${CC} ${KERNEL_SRC_DIR}/croutine.c ${CFLAGS} -c -o ${KERNEL_OUT_DIR}/croutine.o
