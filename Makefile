@@ -15,11 +15,11 @@ CXX = ${PREFIX}-g++
 AR = ${PREFIX}-ar
 OBJCOPY = ${PREFIX}-objcopy
 
-CFLAGS = -I${KERNEL_SRC_DIR}/include -I${DEVICE_SRC_INC} -I${KERNEL_SRC_DIR}/portable/GCC/ARM_CM4_MPU/ -mcpu=cortex-m4 -specs=nano.specs -Os
+CFLAGS = -I${KERNEL_SRC_DIR}/include -I${DEVICE_SRC_INC} -I${KERNEL_SRC_DIR}/portable/GCC/ARM_CM4_MPU/ -I../../hardware/st/stm32wb55cg/include -mcpu=cortex-m4 -nostdlib -nostartfiles -Og -g -L${KERNEL_OUT_DIR} -L${ETHEN_MAIN_OUT}/products/hal
 
 build: freertos
 	${CC} main.c ${CFLAGS} -c -o ${ETHEN_MAIN_OUT}/main.o -L${KERNEL_OUT_DIR} -lfreertos
-	${CC} ${ETHEN_MAIN_OUT}/main.o ${ETHEN_MAIN_OUT}/products/hal/startup.o --specs=nosys.specs -o ${ETHEN_MAIN_OUT}/main.elf -L${KERNEL_OUT_DIR} -L${ETHEN_MAIN_OUT}/products/hal -lfreertos -lhal -T ../../hardware/st/stm32wb55cg/link.lds # TODO: Enable modularity
+	${CC} ${ETHEN_MAIN_OUT}/main.o -o ${ETHEN_MAIN_OUT}/main.elf ${CFLAGS} -lfreertos -lhal -T ../../hardware/st/stm32wb55cg/link.lds
 	${OBJCOPY} ${ETHEN_MAIN_OUT}/main.elf ${ETHEN_MAIN_OUT}/main.bin -O binary
 
 freertos: freertos_folder
